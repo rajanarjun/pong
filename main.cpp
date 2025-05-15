@@ -9,41 +9,73 @@ const int SCREEN_HEIGHT = 600;
 
 int main() {
 
-	if (SDL_Init(SDL_INIT_VIDEO) < 0) {
-		cerr << "SDL could not initialize, SDL_Error:" << SDL_GetError() << endl;
+	if (SDL_Init(SDL_INIT_VIDEO) != 0) {
+		cout << "Error intitializing SDL" << SDL_GetError() << endl;
 		return 1;
 	}
 
-	SDL_Window* win = SDL_CreateWindow("game window", 
-                                        SDL_WINDOWPOS_CENTERED,
-										SDL_WINDOWPOS_CENTERED,
-										SCREEN_WIDTH,
-										SCREEN_HEIGHT,
-										SDL_WINDOW_SHOWN);
-	if (!win) {
-		cerr << "Window could not be created, SDL_Error:" << SDL_GetError() << endl;
+	SDL_Window* win = SDL_CreateWindow("game window", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN);
+	if (win == nullptr) {
+		cout << "Error creating window:" << SDL_GetError() << endl;
 		SDL_Quit();
 		return 1;
 	}
 
-	SDL_Surface* screenSurface = SDL_GetWindowSurface(win);
-	SDL_UpdateWindowSurface(win);
+	SDL_Renderer* renderer = SDL_CreateRenderer(win, -1, SDL_RENDERER_ACCELERATED);
+	if (renderer == nullptr) {
+		cout << "Error creating renderer:" << SDL_GetError() << endl;
+		SDL_Quit();
+		return 1;
+	}
 
 	SDL_Event event; 
 	bool running = true;
-
-	while (running) {
-		while (SDL_PollEvent(&event)) {
-			if (event.type == SDL_QUIT) {
+	while (running) 
+	{
+		while (SDL_PollEvent(&event)) 
+		{
+			if (event.type == SDL_QUIT) 
+			{
 				cout << "Closing window" << endl;
 				running = false;
+				break;
 			}
-			if (event.type == SDL_KEYUP || event.type == SDL_KEYDOWN || event.type == SDLK_RIGHT || event.type == SDLK_LEFT) {
-				cout << "Key Pressed: " << SDL_GetKeyName(event.key.keysym.sym) << endl;
+			if (event.type == SDL_KEYDOWN) 
+			{
+				SDL_Keycode key = event.key.keysym.sym;
+				switch (key)
+				{
+					case SDLK_UP:
+						cout << "UP" << endl;
+						break;
+					case SDLK_DOWN:
+						cout << "DOWN" << endl;
+						break;
+					case SDLK_LEFT:
+						cout << "LEFT" << endl;
+						break;
+					case SDLK_RIGHT:
+						cout << "RIGHT" << endl;
+						break;
+					default:
+						break;
+				}
 			}
 		}
-	}
+		SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+		SDL_RenderClear(renderer);
 
+		SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
+		SDL_Rect rect1 = {0, (SCREEN_HEIGHT/2) - (100/2), 30, 100};
+		SDL_RenderFillRect(renderer, &rect1);
+
+		SDL_Rect rect2 = {SCREEN_WIDTH - 30, (SCREEN_HEIGHT/2) - (100/2), 30, 100};
+		SDL_RenderFillRect(renderer, &rect2);
+
+		SDL_RenderPresent(renderer);
+
+	}
+    SDL_DestroyRenderer(renderer);
 	SDL_DestroyWindow(win);
 	SDL_Quit();
 
