@@ -1,5 +1,8 @@
 #OBJS specifies which files to compile as part of the project
-OBJS = main.cpp
+OBJS = game.cpp paddle.cpp
+
+# Include headers if needed for dependency tracking (optional)
+DEPS = config.h paddle.h
 
 #CC specifies which compiler we're using
 CC = g++
@@ -15,8 +18,15 @@ LINKER_FLAGS = -lSDL2
 OBJ_NAME = game.out
 
 #This is the target that compiles our executable
-all : $(OBJS)
-	$(CC) $(OBJS) $(COMPILER_FLAGS) $(LINKER_FLAGS) -o $(OBJ_NAME)
+all : $(OBJ_NAME)
+
+# Link object files to make executable
+$(OBJ_NAME): $(OBJS)
+	$(CC) $(OBJS) $(COMPILER_FLAGS) $(LINKER_FLAGS) -o $@
+	
+# Compile each .cpp into .o (object) and track headers
+%.o: %.cpp $(DEPS)
+	$(CC) -c $< $(COMPILER_FLAGS)
 
 clean:
 	rm -f $(OBJ_NAME)

@@ -1,11 +1,10 @@
 #include <iostream>
 #include <SDL2/SDL.h>
 #include <unistd.h>
+#include "config.h"
+#include "paddle.h"
 
 using namespace std;
-
-const int SCREEN_WIDTH = 800;
-const int SCREEN_HEIGHT = 600;
 
 int main() {
 
@@ -27,6 +26,9 @@ int main() {
 		SDL_Quit();
 		return 1;
 	}
+
+    Paddle player_1(0, (SCREEN_HEIGHT/2) - (PADDLE_HEIGHT / 2));
+    Paddle player_2((SCREEN_WIDTH - 30), (SCREEN_HEIGHT/2) - (PADDLE_HEIGHT / 2));
 
 	SDL_Event event; 
 	bool running = true;
@@ -66,13 +68,11 @@ int main() {
 		SDL_RenderClear(renderer);
 
 		SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
-		SDL_Rect rect1 = {0, (SCREEN_HEIGHT/2) - (100/2), 30, 100};
-		SDL_RenderFillRect(renderer, &rect1);
-
-		SDL_Rect rect2 = {SCREEN_WIDTH - 30, (SCREEN_HEIGHT/2) - (100/2), 30, 100};
-		SDL_RenderFillRect(renderer, &rect2);
+        player_1.render(renderer);
+        player_2.render(renderer);
 
 		SDL_RenderPresent(renderer);
+        SDL_Delay(16);
 
 	}
     SDL_DestroyRenderer(renderer);
