@@ -8,8 +8,12 @@ Paddle::Paddle(int startX, int startY) {
     rect.h = PADDLE_HEIGHT;
 }
 
-void Paddle::move(int dy) {
-    rect.y += dy;
+void Paddle::move_up(int dy) {
+    rect.y = rect.y - dy;
+}
+
+void Paddle::move_down(int dy) {
+    rect.y = rect.y + dy;
 }
 
 void Paddle::render(SDL_Renderer* renderer) const {

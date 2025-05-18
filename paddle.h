@@ -9,7 +9,8 @@ class Paddle {
     public:
         Paddle(int startX, int startY);
 
-        void move(int dy);
+        void move_up(int dy);
+        void move_down(int dy);
         void render(SDL_Renderer* renderer) const;
         const SDL_Rect& getRect() const;
 };

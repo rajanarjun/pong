@@ -9,7 +9,7 @@ using namespace std;
 int main() {
 
 	if (SDL_Init(SDL_INIT_VIDEO) != 0) {
-		cout << "Error intitializing SDL" << SDL_GetError() << endl;
+        cout << "Error intitializing SDL" << SDL_GetError() << endl;
 		return 1;
 	}
 
@@ -32,38 +32,33 @@ int main() {
 
 	SDL_Event event; 
 	bool running = true;
-	while (running) 
-	{
-		while (SDL_PollEvent(&event)) 
-		{
-			if (event.type == SDL_QUIT) 
-			{
+	while (running) {
+		while (SDL_PollEvent(&event)) {
+			if (event.type == SDL_QUIT) {
 				cout << "Closing window" << endl;
 				running = false;
-				break;
-			}
-			if (event.type == SDL_KEYDOWN) 
-			{
-				SDL_Keycode key = event.key.keysym.sym;
-				switch (key)
-				{
-					case SDLK_UP:
-						cout << "UP" << endl;
-						break;
-					case SDLK_DOWN:
-						cout << "DOWN" << endl;
-						break;
-					case SDLK_LEFT:
-						cout << "LEFT" << endl;
-						break;
-					case SDLK_RIGHT:
-						cout << "RIGHT" << endl;
-						break;
-					default:
-						break;
-				}
 			}
 		}
+
+        const Uint8* keystate = SDL_GetKeyboardState(NULL);
+
+        if (keystate[SDL_SCANCODE_W]) {
+            //cout << "W is held down\n";
+            player_1.move_up(7);
+        }
+        if (keystate[SDL_SCANCODE_S]) {
+            //cout << "S is held down\n";
+            player_1.move_down(7);
+        }
+        if (keystate[SDL_SCANCODE_UP]) {
+            //cout << "A is held down\n";
+            player_2.move_up(7);
+        }
+        if (keystate[SDL_SCANCODE_DOWN]) {
+            //cout << "D is held down\n";
+            player_2.move_down(7);
+        }
+
 		SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
 		SDL_RenderClear(renderer);
 
