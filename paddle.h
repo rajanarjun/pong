@@ -1,5 +1,4 @@
-#ifndef PADDLE_H
-#define PADDLE_H
+#pragma once
 
 #include <SDL2/SDL.h>
 
@@ -15,4 +14,3 @@ class Paddle {
         const SDL_Rect& getRect() const;
 };
         
-#endif

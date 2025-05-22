@@ -3,6 +3,7 @@
 #include <unistd.h>
 #include "config.h"
 #include "paddle.h"
+#include "input_handler.h"
 
 using namespace std;
 
@@ -13,7 +14,7 @@ int main() {
 		return 1;
 	}
 
-	SDL_Window* win = SDL_CreateWindow("game window", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN);
+	SDL_Window* win = SDL_CreateWindow("Pong", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN);
 	if (win == nullptr) {
 		cout << "Error creating window:" << SDL_GetError() << endl;
 		SDL_Quit();
@@ -41,23 +42,7 @@ int main() {
 		}
 
         const Uint8* keystate = SDL_GetKeyboardState(NULL);
-
-        if (keystate[SDL_SCANCODE_W]) {
-            //cout << "W is held down\n";
-            player_1.move_up(7);
-        }
-        if (keystate[SDL_SCANCODE_S]) {
-            //cout << "S is held down\n";
-            player_1.move_down(7);
-        }
-        if (keystate[SDL_SCANCODE_UP]) {
-            //cout << "A is held down\n";
-            player_2.move_up(7);
-        }
-        if (keystate[SDL_SCANCODE_DOWN]) {
-            //cout << "D is held down\n";
-            player_2.move_down(7);
-        }
+        process_player_input(keystate, player_1, player_2);
 
 		SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
 		SDL_RenderClear(renderer);

@@ -1,8 +1,8 @@
 #OBJS specifies which files to compile as part of the project
-OBJS = game.cpp paddle.cpp
+OBJS = game.cpp paddle.cpp input_handler.cpp
 
 # Include headers if needed for dependency tracking (optional)
-DEPS = config.h paddle.h
+DEPS = config.h paddle.h input_handler.h
 
 #CC specifies which compiler we're using
 CC = g++
