@@ -5,6 +5,7 @@
 #include "paddle.h"
 #include "input_handler.h"
 #include "game.h"
+#include "ball.h"
 
 using namespace std;
 
@@ -61,6 +62,7 @@ void game_loop() {
 		SDL_RenderClear(renderer);
 
 		SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
+        RenderCircle(renderer, 400, 300);
         player_1.render(renderer);
         player_2.render(renderer);
 
