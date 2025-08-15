@@ -13,8 +13,7 @@ static SDL_Window* win = nullptr;
 static SDL_Renderer* renderer = nullptr;
 
 static Paddle player_1(0, (SCREEN_HEIGHT/2) - (PADDLE_HEIGHT / 2));
-static Paddle player_2((SCREEN_WIDTH - 30),
-                       (SCREEN_HEIGHT/2) - (PADDLE_HEIGHT / 2));
+static Paddle player_2((SCREEN_WIDTH - 30), (SCREEN_HEIGHT/2) - (PADDLE_HEIGHT / 2));
 
 static Ball ball;
 
@@ -63,7 +62,7 @@ void game_loop() {
 			}
 		}
         const Uint8* keystate = SDL_GetKeyboardState(NULL);
-        process_player_input(keystate, player_1, player_2);
+        process_player_input(keystate, player_1, player_2, DELTA);
 
 		SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
 		SDL_RenderClear(renderer);
@@ -72,9 +71,9 @@ void game_loop() {
         player_1.render(renderer);
         player_2.render(renderer);
 
-        ball.x = 800.0 / 2;
-        ball.y = 600.0 / 2;
-        ball.r = 10.0;
+        ball.x = SCREEN_WIDTH / 2;
+        ball.y = SCREEN_HEIGHT / 2;
+        ball.r = BALL_RADIUS;
 
         fill_circle(renderer, &ball);
 
