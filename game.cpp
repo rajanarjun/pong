@@ -16,6 +16,8 @@ static Paddle player_1(0, (SCREEN_HEIGHT/2) - (PADDLE_HEIGHT / 2));
 static Paddle player_2((SCREEN_WIDTH - 30),
                        (SCREEN_HEIGHT/2) - (PADDLE_HEIGHT / 2));
 
+static Ball ball;
+
 int initialize_game() {
 	if (SDL_Init(SDL_INIT_VIDEO) != 0) {
         cout << "Error intitializing SDL" << SDL_GetError() << endl;
@@ -67,9 +69,14 @@ void game_loop() {
 		SDL_RenderClear(renderer);
 
 		SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
-        RenderCircle(renderer, 400, 300);
         player_1.render(renderer);
         player_2.render(renderer);
+
+        ball.x = 800.0 / 2;
+        ball.y = 600.0 / 2;
+        ball.r = 10.0;
+
+        fill_circle(renderer, &ball);
 
 		SDL_RenderPresent(renderer);
         SDL_Delay(16);

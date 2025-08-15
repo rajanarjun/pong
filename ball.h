@@ -2,4 +2,10 @@
 
 #include <SDL2/SDL.h>
 
-void RenderCircle(SDL_Renderer* renderer, int x0, int y0);
+typedef struct {
+    double x;
+    double y;
+    double r;
+} Ball;
+
+void fill_circle(SDL_Renderer *renderer, Ball *b);
