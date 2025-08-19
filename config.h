@@ -6,5 +6,3 @@ constexpr int PADDLE_WIDTH = 10;
 constexpr int PADDLE_HEIGHT = 100;
 constexpr double BALL_RADIUS = 6;
 constexpr int DELTA = 10;
-
-#endif

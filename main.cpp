@@ -1,15 +1,14 @@
 #include <iostream>
 #include <SDL2/SDL.h>
+#include <SDL2/SDL_ttf.h>
 #include "game.h"
 #include "config.h"
 #include "paddle.h"
 #include "ball.h"
- 
-using namespace std;
 
 int main() {
 	if (SDL_Init(SDL_INIT_VIDEO) != 0) {
-        cout << "Error intitializing SDL" << SDL_GetError() << endl;
+        std::cout << "Error intitializing SDL" << SDL_GetError() << std::endl;
 		return 1;
 	}
 
@@ -19,14 +18,14 @@ int main() {
                                    SCREEN_HEIGHT, 
                                    SDL_WINDOW_SHOWN);
     if (win == nullptr) {
-        cout << "Error creating window:" << SDL_GetError() << endl;
+        std::cout << "Error creating window:" << SDL_GetError() << std::endl;
 		SDL_Quit();
 		return 1;
 	}
 
 	SDL_Renderer *renderer = SDL_CreateRenderer(win, -1, SDL_RENDERER_ACCELERATED);
 	if (renderer == nullptr) {
-		cout << "Error creating renderer:" << SDL_GetError() << endl;
+        std::cout << "Error creating renderer:" << SDL_GetError() << std::endl;
 		SDL_Quit();
 		return 1;
 	}
@@ -38,7 +37,14 @@ int main() {
     ball.y = SCREEN_HEIGHT / 2;
     ball.r = BALL_RADIUS;
 
-	game_loop(win, renderer, player_1, player_2, ball, DELTA);
+    TTF_Init();
+    TTF_Font *font = TTF_OpenFont("font/FSEX302.ttf", 20);
+    if (!font) std::cout << "Could not open font" << std::endl;
+
+	game_loop(win, renderer, player_1, player_2, ball, DELTA, font);
+
+    TTF_CloseFont(font);
+    TTF_Quit();
 
     SDL_DestroyRenderer(renderer);
 	SDL_DestroyWindow(win);

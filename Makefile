@@ -1,8 +1,8 @@
 #OBJS specifies which files to compile as part of the project
-OBJS = main.cpp game.cpp ball.cpp paddle.cpp input_handler.cpp
+OBJS = main.cpp game.cpp ball.cpp paddle.cpp input_handler.cpp score.cpp
 
 # Include headers if needed for dependency tracking (optional)
-DEPS = config.h game.h ball.h paddle.h input_handler.h
+DEPS = config.h game.h ball.h paddle.h input_handler.h score.h
 
 #CC specifies which compiler we're using
 CC = g++
@@ -12,7 +12,7 @@ CC = g++
 COMPILER_FLAGS = -w
 
 #LINKER_FLAGS specifies the libraries we're linking against
-LINKER_FLAGS = -lSDL2 -lSDL2_gfx
+LINKER_FLAGS = -lSDL2 -lSDL2_gfx -lSDL2_ttf
 
 #OBJ_NAME specifies the name of our exectuable
 OBJ_NAME = pong.out

@@ -9,3 +9,4 @@ typedef struct {
 } Ball;
 
 void fill_circle(SDL_Renderer *renderer, Ball *b);
+
