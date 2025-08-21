@@ -7,7 +7,7 @@
 #include "ball.h"
 #include "score.h"
 
-void game_loop(SDL_Window *win, SDL_Renderer *renderer, Paddle &player_1, Paddle &player_2, Ball &ball, int paddle_y_delta, TTF_Font *font) {
+void game_loop(SDL_Renderer *renderer, Paddle &player_1, Paddle &player_2, Ball &ball, int paddle_y_delta, TTF_Font *font) {
 
 	SDL_Event event; 
 	bool running = true;

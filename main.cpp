@@ -38,7 +38,7 @@ int main() {
     TTF_Font *font = TTF_OpenFont("font/FSEX302.ttf", 20);
     if (!font) std::cout << "Could not open font" << std::endl;
 
-	game_loop(win, renderer, player_1, player_2, ball, PADDLE_Y_DELTA, font);
+	game_loop(renderer, player_1, player_2, ball, PADDLE_Y_DELTA, font);
 
     TTF_CloseFont(font);
     TTF_Quit();
