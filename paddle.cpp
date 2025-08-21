@@ -16,7 +16,7 @@ void Paddle::move_down(int dy) {
     rect.y = rect.y + dy;
 }
 
-void Paddle::render(SDL_Renderer* renderer) const {
+void Paddle::render_paddle(SDL_Renderer* renderer) const {
     SDL_RenderFillRect(renderer, &rect);
 }
 

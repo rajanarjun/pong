@@ -30,18 +30,15 @@ int main() {
 		return 1;
 	}
 
-    Paddle player_1(0, (SCREEN_HEIGHT/2) - (PADDLE_HEIGHT / 2));
-    Paddle player_2((SCREEN_WIDTH - 30), (SCREEN_HEIGHT/2) - (PADDLE_HEIGHT / 2));
-    Ball ball;
-    ball.x = SCREEN_WIDTH / 2;
-    ball.y = SCREEN_HEIGHT / 2;
-    ball.r = BALL_RADIUS;
+    Paddle player_1(0, (SCREEN_HEIGHT / 2) - (PADDLE_HEIGHT / 2));
+    Paddle player_2((SCREEN_WIDTH - 30), (SCREEN_HEIGHT / 2) - (PADDLE_HEIGHT / 2));
+    Ball ball( (SCREEN_WIDTH / 2), (SCREEN_HEIGHT / 2), BALL_RADIUS);
 
     TTF_Init();
     TTF_Font *font = TTF_OpenFont("font/FSEX302.ttf", 20);
     if (!font) std::cout << "Could not open font" << std::endl;
 
-	game_loop(win, renderer, player_1, player_2, ball, DELTA, font);
+	game_loop(win, renderer, player_1, player_2, ball, PADDLE_Y_DELTA, font);
 
     TTF_CloseFont(font);
     TTF_Quit();

@@ -10,7 +10,7 @@ class Paddle {
 
         void move_up(int dy);
         void move_down(int dy);
-        void render(SDL_Renderer* renderer) const;
+        void render_paddle(SDL_Renderer* renderer) const;
         const SDL_Rect& getRect() const;
 };
         

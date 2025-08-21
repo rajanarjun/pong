@@ -2,11 +2,15 @@
 
 #include <SDL2/SDL.h>
 
-typedef struct {
-    double x;
-    double y;
-    double r;
-} Ball;
+class Ball {
+    private:
+        double x;
+        double y;
+        double r;
 
-void fill_circle(SDL_Renderer *renderer, Ball *b);
+    public:
+        Ball(double x_coord, double y_coord, double radius);
+
+        void render_ball(SDL_Renderer* renderer) const;
+};
 
