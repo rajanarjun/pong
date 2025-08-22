@@ -32,7 +32,7 @@ int main() {
 
     Paddle player_1(0, (SCREEN_HEIGHT / 2) - (PADDLE_HEIGHT / 2));
     Paddle player_2((SCREEN_WIDTH - 30), (SCREEN_HEIGHT / 2) - (PADDLE_HEIGHT / 2));
-    Ball ball( (SCREEN_WIDTH / 2), (SCREEN_HEIGHT / 2), BALL_RADIUS);
+    Ball ball;
 
     TTF_Init();
     TTF_Font *font = TTF_OpenFont("font/FSEX302.ttf", 20);

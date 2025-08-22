@@ -4,13 +4,19 @@
 
 class Ball {
     private:
-        double x;
-        double y;
         double r;
+        double dir_x;
+        double dir_y;
+        double speed;
+        double init_max_angle;
 
     public:
-        Ball(double x_coord, double y_coord, double radius);
+        double x;
+        double y;
+
+        Ball();
 
         void render_ball(SDL_Renderer* renderer) const;
+        void move_ball();
 };
 
