@@ -9,11 +9,11 @@ Paddle::Paddle(int startX, int startY) {
 }
 
 void Paddle::move_up(int dy) {
-    rect.y = rect.y - dy;
+    rect.y -= dy;
 }
 
 void Paddle::move_down(int dy) {
-    rect.y = rect.y + dy;
+    rect.y += dy;
 }
 
 void Paddle::render_paddle(SDL_Renderer* renderer) const {
