@@ -20,6 +20,7 @@ void game_loop(SDL_Renderer *renderer, Paddle &player_1, Paddle &player_2, Ball 
         const Uint8* keystate = SDL_GetKeyboardState(NULL);
         process_player_input(keystate, player_1, player_2, paddle_y_delta);
         ball.move_ball();
+        ball.side_wall_collision();
 
 		SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
 		SDL_RenderClear(renderer);

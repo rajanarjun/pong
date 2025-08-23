@@ -18,5 +18,6 @@ class Ball {
 
         void render_ball(SDL_Renderer* renderer) const;
         void move_ball();
+        void side_wall_collision();
 };
 

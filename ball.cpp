@@ -10,7 +10,7 @@ Ball::Ball() {
     y = (SCREEN_HEIGHT / 2);
     r = BALL_RADIUS;
     speed = 6.0;
-    init_max_angle = M_PI / 6;
+    init_max_angle = M_PI;
 
     static std::random_device rd;
     static std::mt19937 gen(rd());
@@ -43,3 +43,15 @@ void Ball::move_ball() {
     x += dir_x;
     y += dir_y;
 }
+
+
+void Ball::side_wall_collision() {
+    if (y - r <= 0) {
+        y = r;
+        dir_y *= -1;
+    } else if (y + r >= SCREEN_HEIGHT) {
+        y = SCREEN_HEIGHT - r;
+        dir_y *= -1;
+    }
+}
+
