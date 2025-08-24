@@ -17,13 +17,12 @@ Ball::Ball() {
     static std::mt19937 gen(rd());
 
     std::uniform_real_distribution<> angle_dist(-init_max_angle, init_max_angle);
-    std::uniform_int_distribution<> flip_dist(0, 1);
-
-    // random angle in radians
     double angle = angle_dist(gen);
 
-    // random direction
-    if (flip_dist(gen) == 0) angle = M_PI - angle;
+    std::uniform_int_distribution<> flip_dist(0, 1);
+    if (flip_dist(gen) == 0) {
+        angle = M_PI - angle;
+    }
 
     dir_x = speed * cos(angle);
     dir_y = speed * sin(angle);
@@ -67,13 +66,17 @@ void Ball::check_collision(Paddle &p1, Paddle &p2) {
          (y - r <= pr1.y + pr1.h) )
     {
         dir_x *= -1;
+        dir_x *= 1.05;
+        dir_y *= 1.05;
     } 
 
-    else if ( (x + r >= pr2.x - pr2.w) && 
+    else if ( (x + r >= pr2.x) && 
               (y + r >= pr2.y) && 
               (y - r <= pr2.y + pr2.h) )
     {
         dir_x *= -1;
+        dir_x *= 1.05;
+        dir_y *= 1.05;
     }
 }
 
