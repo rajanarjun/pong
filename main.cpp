@@ -31,7 +31,7 @@ int main() {
 	}
 
     Paddle player_1(0, (SCREEN_HEIGHT / 2) - (PADDLE_HEIGHT / 2));
-    Paddle player_2((SCREEN_WIDTH - 30), (SCREEN_HEIGHT / 2) - (PADDLE_HEIGHT / 2));
+    Paddle player_2((SCREEN_WIDTH - PADDLE_WIDTH), (SCREEN_HEIGHT / 2) - (PADDLE_HEIGHT / 2));
     Ball ball;
 
     TTF_Init();
