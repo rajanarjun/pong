@@ -1,5 +1,6 @@
 #include "ball.h"
 #include "config.h"
+#include "paddle.h"
 #include <iostream>
 #include <random>
 #include <SDL2/SDL.h>
@@ -10,7 +11,7 @@ Ball::Ball() {
     y = (SCREEN_HEIGHT / 2);
     r = BALL_RADIUS;
     speed = 6.0;
-    init_max_angle = M_PI;
+    init_max_angle = M_PI / 6;
 
     static std::random_device rd;
     static std::mt19937 gen(rd());
@@ -45,13 +46,34 @@ void Ball::move_ball() {
 }
 
 
-void Ball::side_wall_collision() {
-    if (y - r <= 0) {
+void Ball::check_collision(Paddle &p1, Paddle &p2) {
+    if (y - r <= 0)
+    {
         y = r;
         dir_y *= -1;
-    } else if (y + r >= SCREEN_HEIGHT) {
+    } 
+
+    else if (y + r >= SCREEN_HEIGHT)
+    {
         y = SCREEN_HEIGHT - r;
         dir_y *= -1;
+    }
+
+    const SDL_Rect& pr1 = p1.getRect();
+    const SDL_Rect& pr2 = p2.getRect();
+
+    if ( (x - r <= pr1.x + pr1.w) && 
+         (y + r >= pr1.y) && 
+         (y - r <= pr1.y + pr1.h) )
+    {
+        dir_x *= -1;
+    } 
+
+    else if ( (x + r >= pr2.x - pr2.w) && 
+              (y + r >= pr2.y) && 
+              (y - r <= pr2.y + pr2.h) )
+    {
+        dir_x *= -1;
     }
 }
 

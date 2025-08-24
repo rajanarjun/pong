@@ -1,6 +1,7 @@
 #pragma once
 
 #include <SDL2/SDL.h>
+#include "paddle.h"
 
 class Ball {
     private:
@@ -18,6 +19,6 @@ class Ball {
 
         void render_ball(SDL_Renderer* renderer) const;
         void move_ball();
-        void side_wall_collision();
+        void check_collision(Paddle &p1, Paddle &p2);
 };
 
